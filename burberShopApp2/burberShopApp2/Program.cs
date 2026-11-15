@@ -29,7 +29,7 @@ namespace BarbershopApp
                         Pause();
                         break;
                     case "2":
-                        Console.WriteLine("Поки не зроблено.");
+                        ShowCostTable();
                         Pause();
                         break;
                     case "3":
@@ -68,6 +68,23 @@ namespace BarbershopApp
             Console.WriteLine("- тривалість у хвилинах (int)");
             Console.WriteLine("- ціна (double)");
             Console.WriteLine("- чи виконано (bool)");
+        }
+
+        static void ShowCostTable()
+        {
+            Console.WriteLine("Залежність ціни від тривалості стрижки:");
+            Console.WriteLine($"{"Час (хв)",10} | {"Вартість (грн)",15}");
+            Console.WriteLine(new string('-', 28));
+
+            double from = 15.0;
+            double to = 60.0;
+            double step = 5.5;
+
+            for (double x = from; x <= to + 1e-9; x += step)
+            {
+                double y = 200.0 + (x * 4.5);
+                Console.WriteLine($"{x,10:F1} | {y,15:F2}");
+            }
         }
     }
 }
