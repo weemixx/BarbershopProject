@@ -86,7 +86,8 @@ namespace BarbershopApp
 
             for (double x = from; x <= to + 1e-9; x += step)
             {
-                double y = 200.0 + (x * 4.5);
+                double y = CalculatePrice(x);
+
                 Console.WriteLine($"{x,10:F1} | {y,15:F2}");
             }
         }
@@ -142,6 +143,12 @@ namespace BarbershopApp
                 Console.Write($"| {colTotals[c],7:F1}");
             }
             Console.WriteLine($"| {grandTotal,8:F1}");
+
+           
+        }
+        static double CalculatePrice(double duration)
+        {
+            return 200.0 + (duration * 4.5);
         }
     }
 }
