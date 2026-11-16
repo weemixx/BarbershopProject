@@ -74,17 +74,14 @@ namespace BarbershopApp
             Console.WriteLine("- чи виконано (bool)");
         }
 
-        static void ShowCostTable()
+        static void ShowCostTable(double from, double to, double step)
         {
             Console.WriteLine("Залежність ціни від тривалості стрижки:");
             Console.WriteLine($"{"Час (хв)",10} | {"Вартість (грн)",15}");
             Console.WriteLine(new string('-', 28));
 
-            double from = 15.0;
-            double to = 60.0;
-            double step = 5.5;
-
             for (double x = from; x <= to + 1e-9; x += step)
+               
             {
                 double y = CalculatePrice(x);
 
