@@ -12,12 +12,7 @@ namespace BarbershopApp
 
             while (running)
             {
-                Console.WriteLine("=== Барбершоп ===");
-                Console.WriteLine("1 - Про програму");
-                Console.WriteLine("2 - Таблиця вартості послуги");
-                Console.WriteLine("3 - Завантаженість майстрів");
-                Console.WriteLine("0 - Вихід");
-                Console.Write("Ваш вибір: ");
+                ShowMenu();
 
                 string choice = Console.ReadLine();
                 Console.WriteLine();
@@ -53,6 +48,15 @@ namespace BarbershopApp
             Console.WriteLine("\nНатисніть будь-яку клавішу...");
             Console.ReadKey(true);
             Console.Clear();
+        }
+        static void ShowMenu()
+        {
+            Console.WriteLine("=== Барбершоп ===");
+            Console.WriteLine("1 - Про програму");
+            Console.WriteLine("2 - Таблиця вартості послуги");
+            Console.WriteLine("3 - Завантаженість майстрів");
+            Console.WriteLine("0 - Вихід");
+            Console.Write("Ваш вибір: ");
         }
 
         static void ShowAbout()
