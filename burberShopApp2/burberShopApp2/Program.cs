@@ -24,11 +24,16 @@ namespace BarbershopApp
                         Pause();
                         break;
                     case "2":
-                        ShowCostTable();
+                        double from = ReadDouble("Початковий час (хв, 10-120): ", 10, 120);
+                        double to = ReadDouble("Кінцевий час (хв, від поч. до 240): ", from, 240);
+                        double step = ReadDouble("Крок (хв, 1-30): ", 1, 30);
+                        ShowCostTable(from, to, step);
                         Pause();
                         break;
                     case "3":
-                        ShowWorkloadTable();
+                        int rows = ReadInt("Введіть кількість майстрів (1-20): ", 1, 20);
+                        int cols = ReadInt("Введіть кількість робочих днів (1-31): ", 1, 31);
+                        ShowWorkloadTable(rows, cols);
                         Pause();
                         break;
                     case "0":
@@ -49,6 +54,7 @@ namespace BarbershopApp
             Console.ReadKey(true);
             Console.Clear();
         }
+
         static void ShowMenu()
         {
             Console.WriteLine("=== Барбершоп ===");
@@ -81,30 +87,14 @@ namespace BarbershopApp
             Console.WriteLine(new string('-', 28));
 
             for (double x = from; x <= to + 1e-9; x += step)
-               
             {
                 double y = CalculatePrice(x);
-
                 Console.WriteLine($"{x,10:F1} | {y,15:F2}");
             }
         }
 
-        static void ShowWorkloadTable()
+        static void ShowWorkloadTable(int rows, int cols)
         {
-            Console.Write("Введіть кількість майстрів (рядки): ");
-            if (!int.TryParse(Console.ReadLine(), out int rows) || rows <= 0)
-            {
-                Console.WriteLine("Помилка: потрібно ввести додатне ціле число.");
-                return;
-            }
-
-            Console.Write("Введіть кількість робочих днів (стовпці): ");
-            if (!int.TryParse(Console.ReadLine(), out int cols) || cols <= 0)
-            {
-                Console.WriteLine("Помилка: потрібно ввести додатне ціле число.");
-                return;
-            }
-
             Console.WriteLine("\nЗавантаженість майстрів (к-сть клієнтів на день):");
 
             Console.Write($"{"Майстер",10}");
@@ -140,12 +130,35 @@ namespace BarbershopApp
                 Console.Write($"| {colTotals[c],7:F1}");
             }
             Console.WriteLine($"| {grandTotal,8:F1}");
-
-           
         }
+
         static double CalculatePrice(double duration)
         {
             return 200.0 + (duration * 4.5);
+        }
+
+        static int ReadInt(string prompt, int min, int max)
+        {
+            int result;
+            while (true)
+            {
+                Console.Write(prompt);
+                if (int.TryParse(Console.ReadLine(), out result) && result >= min && result <= max)
+                    return result;
+                Console.WriteLine($"Помилка: введіть ціле число від {min} до {max}.");
+            }
+        }
+
+        static double ReadDouble(string prompt, double min, double max)
+        {
+            double result;
+            while (true)
+            {
+                Console.Write(prompt);
+                if (double.TryParse(Console.ReadLine(), out result) && result >= min && result <= max)
+                    return result;
+                Console.WriteLine($"Помилка: введіть число від {min} до {max}.");
+            }
         }
     }
 }
